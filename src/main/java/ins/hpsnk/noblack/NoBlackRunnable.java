@@ -33,7 +33,7 @@ public class NoBlackRunnable implements Runnable {
                     this.jFrame.setTitle(String.valueOf(this.interval - i));
 
                     if (this.systemTray != null && systemTray.getTrayIcons().length > 0) {
-                        systemTray.getTrayIcons()[0].setToolTip("Noblack : " + i);
+//                        systemTray.getTrayIcons()[0].setToolTip("Noblack : " + i);
                         systemTray.getTrayIcons()[0].setImage(createImage(i));
                     }
                     Thread.sleep(1000L);
