@@ -13,20 +13,70 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.20.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.22.0</version>
+        </dependency>
+    </dependencies>
+
+
     <build>
         <plugins>
+            <!-- clean时删除指定目录(release) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}/release</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <!-- 可执行的jar文件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <shadedArtifactAttached>false</shadedArtifactAttached>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>ins.hpsnk.noblack.NoBlackMain</mainClass>
+                        </transformer>
+                    </transformers>
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <mainClass>ins.hpsnk.noblack.NoBlackMain</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 复制jar文件到release目录 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>ins.hpsnk.noblack.NoBlackMain</mainClass>
-                            <addClasspath>true</addClasspath>
-                            <addExtensions>true</addExtensions>
-                            <packageName>パッケージ</packageName>
-                        </manifest>
-                    </archive>
+                    <!-- 指定打包的jar包输出路径 -->
+                    <outputDirectory>${project.basedir}/release</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
