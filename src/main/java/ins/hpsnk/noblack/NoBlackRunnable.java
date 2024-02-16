@@ -38,16 +38,15 @@ public class NoBlackRunnable implements Runnable {
 
         countdown--;
 
+        // update Title and SystemTray
+        this.jFrame.setTitle(String.valueOf(countdown));
+        if (this.systemTray != null && systemTray.getTrayIcons().length > 0) {
+            // systemTray.getTrayIcons()[0].setToolTip("Noblack : " + i);
+            systemTray.getTrayIcons()[0].setImage(createImage(countdown));
+        }
+
         if (this.countdown > 0) {
             logger.debug("  Check {}/{}.", interval - countdown, interval);
-
-            this.jFrame.setTitle(String.valueOf(countdown));
-
-            if (this.systemTray != null && systemTray.getTrayIcons().length > 0) {
-                // systemTray.getTrayIcons()[0].setToolTip("Noblack : " + i);
-                systemTray.getTrayIcons()[0].setImage(createImage(countdown));
-            }
-
         } else {
             logger.info("  Shake Mouse.");
 
@@ -74,8 +73,7 @@ public class NoBlackRunnable implements Runnable {
 
         // 图片背景
         // 任务栏的背景色
-        // graphics.setColor(SystemColor.activeCaption.brighter());
-        graphics.setColor(Color.blue);
+        graphics.setColor(cooldown > 0 ? Color.BLUE : Color.RED);
         graphics.fillRect(0, 0, width, height);
 
         // 在边框显示进图条
