@@ -60,8 +60,7 @@ public class NoBlackRunnable implements Runnable {
       }
 
     } catch (Exception e) {
-      logger.error("Exception in NoBlackRunnable.run");
-      logger.trace(e);
+      logger.error("Exception in NoBlackRunnable.run", e);
     }
   }
 
