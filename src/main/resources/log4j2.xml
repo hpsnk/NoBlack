@@ -2,10 +2,10 @@
 <Configuration status="WARN">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{YYYY/MM/DD}][%d{HH:mm:ss.SSS}][%-5level][%logger{36}]%msg%n"/>
+            <PatternLayout pattern="[%d{YYYY/MM/dd}][%d{HH:mm:ss.SSS}][%-5level][%logger{36}]%msg%n"/>
         </Console>
         <File name="LogFile" fileName="NoBlack.log">
-            <PatternLayout pattern="[%d{YYYY/MM/DD}][%d{HH:mm:ss.SSS}][%-5level][%logger{36}]%msg%n"/>
+            <PatternLayout pattern="[%d{YYYY/MM/dd}][%d{HH:mm:ss.SSS}][%-5level][%logger{36}]%msg%n"/>
         </File>
     </Appenders>
     <Loggers>
