@@ -50,10 +50,14 @@ public class NoBlackRunnable implements Runnable {
         } else {
             logger.info("  Shake Mouse.");
 
-            // shake mouse
-            Point currentPoint = MouseInfo.getPointerInfo().getLocation();
-            robot.mouseMove(currentPoint.x - 1, currentPoint.y - 1);
-            robot.mouseMove(currentPoint.x, currentPoint.y);
+            try {
+                // shake mouse
+                Point currentPoint = MouseInfo.getPointerInfo().getLocation();
+                robot.mouseMove(currentPoint.x - 1, currentPoint.y - 1);
+                robot.mouseMove(currentPoint.x, currentPoint.y);
+            } catch (Exception e) {
+                logger.error("robot.mouseMove failed.", e);
+            }
 
             // reset countdown time
             this.countdown = this.interval;
